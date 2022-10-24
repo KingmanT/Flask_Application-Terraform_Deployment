@@ -13,7 +13,7 @@ pipeline {
         '''
      }
    }
-    stage ('test') {
+    stage ('Test') {
       steps {
         sh '''#!/bin/bash
         source test3/bin/activate
@@ -44,7 +44,7 @@ pipeline {
         withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'), 
                         string(credentialsId: 'AWS_SECRET_KEY', variable: 'aws_secret_key')]) {
                             dir('intTerraform') {
-                              sh 'terraform plan -out plan.tfplan -var="aws_access_key=$aws_access_key" -var="aws_secret_key=$aws_secret_key"' 
+                              sh 'terraform plan -out plan.tfplan -var="aws_access_key=${aws_access_key}" -var="aws_secret_key=${aws_secret_key}"' 
                             }
          }
     }
