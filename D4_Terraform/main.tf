@@ -1,3 +1,6 @@
+variable "aws_access_key" {}
+variable "aws_secret_key" {}
+
 # configure aws provider
 provider "aws" {
   region = var.region
