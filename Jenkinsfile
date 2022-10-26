@@ -12,6 +12,14 @@ pipeline {
         flask run &
         '''
      }
+      post {
+        success {
+          slackSend (message: "FYI: ${BUILD_TAG} has SUCCESSFULLY completed its 'BUILD' stage")
+        }
+        failure {
+          slackSend (message: "ATTENTION: ${BUILD_TAG} has FAILED its 'BUILD' stage")
+          }
+        }
    }
     stage ('Test') {
       steps {
@@ -25,7 +33,12 @@ pipeline {
         always {
           junit 'test-reports/results.xml'
         }
-       
+      success {
+          slackSend (message: "FYI: ${BUILD_TAG} has SUCCESSFULLY completed its 'TEST' stage")
+        }
+        failure {
+          slackSend (message: "ATTENTION: ${BUILD_TAG} has FAILED its 'TEST' stage")
+        }
       }
     }
    
@@ -38,6 +51,14 @@ pipeline {
                             }
          }
     }
+       post {
+        success {
+          slackSend (message: "FYI: ${BUILD_TAG} has SUCCESSFULLY completed its 'INIT' stage")
+        }
+        failure {
+          slackSend (message: "ATTENTION: ${BUILD_TAG} has FAILED its 'INIT' stage")
+          }
+        }
    }
       stage('Plan') {
        steps {
@@ -48,6 +69,14 @@ pipeline {
                             }
          }
     }
+        post {
+        success {
+          slackSend (message: "FYI: ${BUILD_TAG} has SUCCESSFULLY completed its 'PLAN' stage")
+        }
+        failure {
+          slackSend (message: "ATTENTION: ${BUILD_TAG} has FAILED its 'PLAN' stage")
+          }
+        }
    }
       stage('Apply') {
        steps {
@@ -58,6 +87,14 @@ pipeline {
                             }
          }
     }
+      post {
+        success {
+          slackSend (message: "FYI: ${BUILD_TAG} has SUCCESSFULLY completed its 'APPLY' stage")
+        }
+        failure {
+          slackSend (message: "ATTENTION: ${BUILD_TAG} has FAILED its 'APPLY' stage")
+          }
+        }  
    }
      stage('Destroy') {
        steps {
@@ -68,6 +105,14 @@ pipeline {
                                                 }
                             }
                       }
-                }
-            }
+       post {
+        success {
+          slackSend (message: "FYI: ${BUILD_TAG} has SUCCESSFULLY completed its 'DESTROY' stage")
+        }
+        failure {
+          slackSend (message: "ATTENTION: ${BUILD_TAG} has FAILED its 'DESTROY' stage")
+          }
+        }
+        }
+       }
  }
