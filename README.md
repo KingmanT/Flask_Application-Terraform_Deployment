@@ -70,11 +70,11 @@ Previously, Flask Applications were deployed into infrastructure that had to be 
 
 Jenkins pipeline failed after having successful builds- During testing of the pipeline, the stages would suddenly start failing despite having previously successful builds. Looking at the 'console output' revealed the following error:
 
-![](RackMultipart20221027-1-texd2w_html_88c7e0facccb8356.png)
+![alt text](https://github.com/KingmanT/Flask_Application-Terraform_Deployment/blob/main/images/Plan%20fail%20timeout.PNG)
 
 The error code read: 'timeout while waiting for plugin to start.' With some research, it was found that Terraform was unable to perform any more actions because the EC2 (which is also running Jenkins) had reached its limit on resources. The EC2 instance was rebooted and the build was successful after that.
 
-![](RackMultipart20221027-1-texd2w_html_43ea432ebd33a704.png)
+![alt text](https://github.com/KingmanT/Flask_Application-Terraform_Deployment/blob/main/images/Jenkins%20Builds.PNG)
 
 # Conclusion:
 
