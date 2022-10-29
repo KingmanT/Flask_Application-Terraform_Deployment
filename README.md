@@ -21,11 +21,11 @@ Previously, Flask Applications were deployed into infrastructure that had to be 
 
 - In order for Jenkins to execute Terraform commands, it first needs to be installed onto the instance.
 - Similar to the installation of Jenkins, the terraform installation files and keyrings needed to be downloaded from hashicorp.com, decrypted, and added to the sources.list.d directory.
-  - wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+  - `wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg`
 
-  - echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb\_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+  - `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb\_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
 
-  - sudo apt update && sudo apt install terraform
+  - `sudo apt update && sudo apt install terraform`
 
 ### 3. Configure AWS credentials on Jenkins
 
@@ -65,6 +65,10 @@ Previously, Flask Applications were deployed into infrastructure that had to be 
 - Because the infrastructure created by Terraform would incur charges if left running, the application and infrastructure should be terminated if the application is not in use.
   - To do this, a "Destroy" stage is added to the pipeline that would terminate all of the infrastructure that was created by it during the other stages.
   - Note: if Jenkins attempts to build the pipeline again, the application will not be running after the stages are complete unless the "destroy" stage is removed from the pipeline.
+  
+## System Design Diagram:
+
+To view the diagram of the system design/deployment pipeline, click [HERE](https://github.com/KingmanT/Flask_Application-Terraform_Deployment/blob/main/images/D4%20Diagram.jpg)
 
 ## ISSUES/TROUBLESHOOTING:
 
